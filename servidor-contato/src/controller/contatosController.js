@@ -6,7 +6,22 @@ const getAll = (request, response) => {
 };
 
 const add = (request, response) =>{
- model.agenda.contatos.push(request.body)
+ let teste1 = model.agenda.contatos
+ let nome = request.body.nome
+  let contato = request.body
+  
+  // let adicionar = model.agenda.contatos.push(contato)
+
+  for(let i=0 ; i < teste1.lenght; i++){
+    console.log(teste1[i])
+    if ( nome == teste){
+      console.log("ta dando certo mulher")
+    } else{
+      console.log("Erro")
+    }
+  }
+  
+  // contato.id = Math.random().toString(36).substr(-8)// CRIANDO ID NO POST 
 
   response.status(200).send()
 
