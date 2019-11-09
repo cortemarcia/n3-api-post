@@ -4,6 +4,11 @@ const getAll = (request, response) => {
   console.log(request.url);
   response.status(200).send(model.agenda);
 };
+//  CONVERSOR DE DATA
+const conversorData = (dataString) => {
+  const dia = dataString.split("/")[0]
+  const mes = dataString.split("/")[1]
+  const ano = dataString.split("/")[2]
 
 //  CONVERSOR DE DATA
 const conversorData = (dataString) => {
@@ -33,6 +38,20 @@ function signo(dataNascimento) {
 //     return "Erro"
 //   }
 // }
+  const dataFormatada = new Date(ano, mes, dia)
+  return dataFormatada
+}
+
+// FUNCAO DO SIGNO
+function signo(request, response) {
+  let obj = request.body
+  let dataConvertida = conversorData(obj.dataNascimento)
+  if (obj.dataNascimento == dataConvertida) {
+    response.status(200).send("Olá" + obj.nome + "Seu signo é: " + "Aries. ")
+  } else {
+    response.status(400).send("Erro")
+  }
+}
 
 // CADASTRO post
 const add = (request, response) => {
@@ -50,6 +69,7 @@ const add = (request, response) => {
       response.status(201).send()
       let teste = signo(conversorData(contato.dataNascimento))
       console.log(teste)
+      response.status(201).send(signo)
     }
   }
 
