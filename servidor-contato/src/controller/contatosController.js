@@ -24,8 +24,7 @@ const conversorData = (dataString) => {
 function signo(dataNascimento) {
 
   if (dataNascimento >= new Date(dataNascimento.getYear(), 2, 21) && dataNascimento <= new Date(dataNascimento.getYear(), 03, 20)) {
-
-    return "aries"
+      return  "Olá" + contato.nome + "O seu signo é : aries"
   } else {
     return "Erro"
   }
@@ -38,20 +37,20 @@ function signo(dataNascimento) {
 //     return "Erro"
 //   }
 // }
-  const dataFormatada = new Date(ano, mes, dia)
-  return dataFormatada
-}
+//   const dataFormatada = new Date(ano, mes, dia)
+//   return dataFormatada
+// }
 
-// FUNCAO DO SIGNO
-function signo(request, response) {
-  let obj = request.body
-  let dataConvertida = conversorData(obj.dataNascimento)
-  if (obj.dataNascimento == dataConvertida) {
-    response.status(200).send("Olá" + obj.nome + "Seu signo é: " + "Aries. ")
-  } else {
-    response.status(400).send("Erro")
-  }
-}
+// // FUNCAO DO SIGNO
+// function signo(request, response) {
+//   let obj = request.body
+//   let dataConvertida = conversorData(obj.dataNascimento)
+//   if (obj.dataNascimento == dataConvertida) {
+//     response.status(200).send("Olá" + obj.nome + "Seu signo é: " + "Aries. ")
+//   } else {
+//     response.status(400).send("Erro")
+//   }
+// }
 
 // CADASTRO post
 const add = (request, response) => {
@@ -59,8 +58,8 @@ const add = (request, response) => {
   let contato = request.body
   contato.id = Math.random().toString(36).substr(-8)//Criando ID UNICO
 
-  if (!contato.nome || !contato.dataNascimento || !contato.celular) {
-    response.status(400).send("Dados inválidos");
+  if (!contato.nome || !contato.dataNascimento || !contato.celular){
+    response.status(400).send("Dados inválidos")
   } else {
     if (baseDados.find(dado => dado.nome === contato.nome)) {
       response.status(400).send("Contato já cadastrado")
@@ -69,20 +68,14 @@ const add = (request, response) => {
       response.status(201).send()
       let teste = signo(conversorData(contato.dataNascimento))
       console.log(teste)
-      response.status(201).send(signo)
+      response.status(201).send(teste)
     }
-  }
 
-}
-// O que fazer?
-// - linkar data de nascimento com o signo (Fazer umanova funcao);
-// - Depois de cadastrado linkar esta funcão nova  na função principal conforme propriedade dataNascimento.
-
-
+    
+  }    
 
 
 module.exports = {
   getAll,
   add
 }
-
